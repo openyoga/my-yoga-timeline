@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inspirations (<a href="/inspirations/new">new</a>){% endblock %}
+
+{% block body %}
+
+{% for inspiration in inspirations %}
+<h2><a href="/inspirations/{{ inspiration.id }}/edit">{{ inspiration.author }}</a></h2>
+<p>{{ inspiration.title }}<br>{{ inspiration.reference }}</p>
+{% endfor %}
+
+{% endblock %}

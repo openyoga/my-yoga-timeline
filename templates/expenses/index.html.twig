@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Expenses (<a href="/expenses/new">new</a>){% endblock %}
+
+{% block body %}
+
+{% for expense in expenses %}
+<h2><a href="/expenses/{{ expense.id }}/edit">{{ expense.dateSpent|localizeddate('long','none')}}</a></h2>
+<p>
+    {{ constant('CURRENCY_SYMBOL', expense) }} {{ expense.amount }} - {{ expense.description }}</p>
+{% endfor %}
+
+{% endblock %}

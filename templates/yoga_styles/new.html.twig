@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Yoga Style{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<div class="form-group">
+  <button type="submit" class="btn btn-primary">Create</button>
+  <a href="/locations" class="btn btn-outline-primary">Cancel</a>
+</div>
+{{ form_end(form) }}
+
+{% endblock %}

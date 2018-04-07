@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Locations (<a href="/locations/new">new</a>){% endblock %}
+
+{% block body %}
+
+{% for location in locations %}
+<h2><a href="/locations/{{ location.id }}/edit">{{ location.name }}</a></h2>
+<p>{% if location.street %}{{ location.street }}<br>{% endif %}{{ location.zipCode }} {{ location.city }}</p>
+{% endfor %}
+
+{% endblock %}

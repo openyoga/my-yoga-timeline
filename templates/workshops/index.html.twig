@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Workshops (<a href="/workshops/new">new</a>){% endblock %}
+
+{% block body %}
+
+{% for workshop in workshops %}
+<h2><a href="/workshops/{{ workshop.id }}/edit/workshop_index">{{ workshop.yogaStyle.name }}</a></h2>
+<p>
+  <strong>Date: </strong>{{ workshop.plannedDate|localizeddate('long', 'short')}} ({{ workshop.plannedDate|date('l') }}, {{ workshop.duration}} minutes)<br>
+  <strong>Location: </strong>{{ workshop.location.name}}<br>
+  <strong>Inspiration: </strong>{% if workshop.inspiration is not null %}{{ workshop.inspiration.author }} | {{ workshop.inspiration.title }} | {{ workshop.inspiration.reference }}{% endif %}<br>
+</p>
+{% endfor %}
+
+{% endblock %}

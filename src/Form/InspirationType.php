@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Inspiration;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+class InspirationType extends AbstractType
+{
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => Inspiration::class,
+        ));
+    }
+    
+    // https://stackoverflow.com/questions/14756362/symfony2-form-validation-with-html5-and-cancel-button
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('author', TextType::class, array(
+                //'label' => 'label.xxx',
+                'required' => true
+            ))
+            ->add('title', TextType::class, array(
+                //'label' => 'label.xxx',
+                'required' => true
+            ))
+            ->add('reference', TextareaType::class, array(
+                //'label' => 'label.xxx',
+                'required' => false
+            ))
+        ;
+    }
+}
+

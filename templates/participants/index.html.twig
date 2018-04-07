@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participants (<a href="/participants/new">new</a>){% endblock %}
+
+{% block body %}
+
+{% for participant in participants %}
+<h2><a href="/participants/{{ participant.id }}/edit">{% if participant.academicTitle is not null %}{{ participant.academicTitle }} {% endif %}{{ participant.firstName}}{% if participant.lastName is not null %} {{ participant.lastName }}{% endif %}</a></h2>
+<p>
+  <a href="mailto:{{ participant.email }}">{{ participant.email }}</a><br>
+  {{ participant.comments}}<br>
+  <strong>Info mails: </strong>{% if participant.infoMailsYn == 'Y' %}Yes{% else %}No{% endif %}<br>
+  <strong>Active: </strong>{% if participant.activeYn == 'Y' %}Yes{% else %}No{% endif %}<br>
+</p>
+{% endfor %}
+
+{% endblock %}

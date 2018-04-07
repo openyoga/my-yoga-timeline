@@ -1,0 +1,21 @@
+{#
+   Each field type is rendered by a template fragment, which is determined
+   by the name of your form type class (DateTimePickerType -> date_time_picker)
+   and the suffix "_widget". This can be controlled by overriding getBlockPrefix()
+   in DateTimePickerType.
+
+   See https://symfony.com/doc/current/cookbook/form/create_custom_field_type.html#creating-a-template-for-the-field
+#}
+
+{# https://tempusdominus.github.io/bootstrap-4/Usage/#custom-icons #}
+
+{% block date_time_picker_widget %}
+<div class="input-group date" id="{{ id }}-datetimepicker" data-target-input="nearest">
+  {{ block('datetime_widget') }}
+  <div class="input-group-append" data-target="#{{ id }}-datetimepicker" data-toggle="datetimepicker">
+    <div class="input-group-text">
+      <i class="fa fa-calendar" aria-hidden="true"></i>
+    </div>
+  </div>
+</div>
+{% endblock %}
