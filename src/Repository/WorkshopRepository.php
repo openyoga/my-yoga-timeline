@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Workshop;
+use App\Entity\WorkshopParticipant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -40,8 +41,8 @@ class WorkshopRepository extends ServiceEntityRepository
 
     public function findUpcomingJoinedDetails()
     {
-        $yesterday = new \DateTime("now");
-        $yesterday->modify('-1 day');
+        $nowMinus24Hours = new \DateTime("now");
+        $nowMinus24Hours->modify('-24 hour');
         return $this->createQueryBuilder('w')
             // YogaStyle
             ->innerJoin('w.yogaStyle', 'y')
@@ -53,8 +54,8 @@ class WorkshopRepository extends ServiceEntityRepository
             ->leftJoin('w.inspiration', 'i')
             ->addSelect('i')
             // bind parameter
-            ->andWhere('w.plannedDate > :yesterday')
-            ->setParameter('yesterday', $yesterday)
+            ->andWhere('w.plannedDate > :nowMinus24Hours')
+            ->setParameter('nowMinus24Hours', $nowMinus24Hours)
             // order
             ->orderBy('w.plannedDate', 'ASC')
             // get result
@@ -72,13 +73,62 @@ class WorkshopRepository extends ServiceEntityRepository
             ->innerJoin('w.location', 'l')
             ->addSelect('l')
             // Inspiration
-            ->innerJoin('w.inspiration', 'i')
+            ->leftJoin('w.inspiration', 'i')
             ->addSelect('i')
             // bind parameter
             ->andWhere('w.id = :id')
-            ->setParameter('id', $productId)
+            ->setParameter('id', $workshopId)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function findParticipantsByWorkshopId($workshopId)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+            SELECT 
+                p.*,
+                wp.special_fee,
+                wp.fee_payed_yn,
+                wp.attending_yn
+            FROM 
+                workshops_participants wp
+                join participants p ON wp.participant_id = p.id
+            WHERE 
+                wp.workshop_id = :workshop_id
+            ORDER BY 
+                p.first_name ASC,
+                p.last_name ASC
+            ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['workshop_id' => $workshopId]);
+        return $stmt->fetchAll();
+    }
+
+    public function findAvailableParticipantsByWorkshopId($workshopId)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+            SELECT 
+                p.*
+            FROM 
+                participants p
+            WHERE 
+                p.id not in (
+                    SELECT 
+                        participant_id
+                    FROM
+                        workshops_participants
+                    WHERE
+                        workshop_id = :workshop_id
+                )
+            ORDER BY 
+                p.first_name ASC,
+                p.last_name ASC
+            ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['workshop_id' => $workshopId]);
+        return $stmt->fetchAll();
     }
 
 //    /**

@@ -15,6 +15,10 @@ class Location
 {
     const NUM_ITEMS = 10;
 
+    public function __construct() {
+        $this->workshops = new ArrayCollection();
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -57,9 +61,7 @@ class Location
      * @ORM\OneToMany(targetEntity="App\Entity\Workshop", mappedBy="location")
      */
     private $workshops;
-    public function __construct() {
-        $this->workshops = new ArrayCollection();
-    }
+
     /**
      * @return Collection|Workshop[]
      */

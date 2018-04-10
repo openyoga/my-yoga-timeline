@@ -7,10 +7,8 @@
 {% for participant in participants %}
 <h2><a href="/participants/{{ participant.id }}/edit">{% if participant.academicTitle is not null %}{{ participant.academicTitle }} {% endif %}{{ participant.firstName}}{% if participant.lastName is not null %} {{ participant.lastName }}{% endif %}</a></h2>
 <p>
-  <a href="mailto:{{ participant.email }}">{{ participant.email }}</a><br>
-  {{ participant.comments}}<br>
-  <strong>Info mails: </strong>{% if participant.infoMailsYn == 'Y' %}Yes{% else %}No{% endif %}<br>
-  <strong>Active: </strong>{% if participant.activeYn == 'Y' %}Yes{% else %}No{% endif %}<br>
+  <a href="mailto:{{ participant.email }}">{{ participant.email }}</a> - {% if participant.infoMailsYn == 'Y' %}info mails{% else %}no info mails{% endif %}, {% if participant.activeYn == 'Y' %}active{% else %}inactive{% endif %}<br>
+  {{ participant.comments}}
 </p>
 {% endfor %}
 

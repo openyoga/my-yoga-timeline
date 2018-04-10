@@ -15,6 +15,10 @@ class Inspiration
 {
     const NUM_ITEMS = 10;
 
+    public function __construct() {
+        $this->workshops = new ArrayCollection();
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -50,9 +54,7 @@ class Inspiration
      * @ORM\OneToMany(targetEntity="App\Entity\Workshop", mappedBy="inspiration")
      */
     private $workshops;
-    public function __construct() {
-        $this->workshops = new ArrayCollection();
-    }
+
     /**
      * @return Collection|Workshop[]
      */

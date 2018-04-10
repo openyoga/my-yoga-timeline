@@ -15,6 +15,10 @@ class YogaStyle
 {
     const NUM_ITEMS = 10;
 
+    public function __construct() {
+        $this->workshops = new ArrayCollection();
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -43,9 +47,7 @@ class YogaStyle
      * @ORM\OneToMany(targetEntity="App\Entity\Workshop", mappedBy="yogaStyle")
      */
     private $workshops;
-    public function __construct() {
-        $this->workshops = new ArrayCollection();
-    }
+
     /**
      * @return Collection|Workshop[]
      */

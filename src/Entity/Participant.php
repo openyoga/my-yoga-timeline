@@ -48,7 +48,7 @@ class Participant
     public function setLastName($lastName) {        $this->lastName = $lastName; }
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100, nullable=false, unique=true)
      * @Assert\NotBlank
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
