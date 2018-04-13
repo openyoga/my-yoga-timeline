@@ -8,14 +8,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\WorkshopParticipantRepository")
- * @UniqueEntity(fields={"workshop", "participant"}, errorPath="participant", message="This participant is already registered for the workshop.")
- * @ORM\Table(name="workshops_participants", 
+ * @ORM\Entity(repositoryClass="App\Repository\EventParticipantRepository")
+ * @UniqueEntity(fields={"event", "participant"}, errorPath="participant", message="This participant is already registered for the event.")
+ * @ORM\Table(name="events_participants", 
  *    uniqueConstraints={
- *        @UniqueConstraint(name="unique_workshop_participant", columns={"workshop_id", "participant_id"})
+ *        @UniqueConstraint(name="unique_event_participant", columns={"event_id", "participant_id"})
  *    })
  */
-class WorkshopParticipant
+class EventParticipant
 {
     const NUM_ITEMS = 10;
 
@@ -28,13 +28,13 @@ class WorkshopParticipant
     public function getId() { return $this->id; }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Workshop")
+     * @ORM\ManyToOne(targetEntity="Event")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank
      */
-    private $workshop;
-    public function getWorkshop()          { return $this->workshop;             }
-    public function setWorkshop($workshop) {        $this->workshop = $workshop; }
+    private $event;
+    public function getEvent()          { return $this->event;             }
+    public function setEvent($event) {        $this->event = $event; }
 
     /**
      * @ORM\ManyToOne(targetEntity="Participant")

@@ -15,7 +15,7 @@ class Version20180328184640 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE workshops CHANGE yoga_style_id yoga_style_id INT NOT NULL, CHANGE location_id location_id INT NOT NULL');
+        $this->addSql('ALTER TABLE events CHANGE yoga_style_id yoga_style_id INT NOT NULL, CHANGE location_id location_id INT NOT NULL');
     }
 
     public function down(Schema $schema)
@@ -23,6 +23,6 @@ class Version20180328184640 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE workshops CHANGE yoga_style_id yoga_style_id INT DEFAULT NULL, CHANGE location_id location_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE events CHANGE yoga_style_id yoga_style_id INT DEFAULT NULL, CHANGE location_id location_id INT DEFAULT NULL');
     }
 }

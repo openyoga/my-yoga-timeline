@@ -16,7 +16,7 @@ class Inspiration
     const NUM_ITEMS = 10;
 
     public function __construct() {
-        $this->workshops = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -51,15 +51,15 @@ class Inspiration
     public function setReference($reference) {        $this->reference = $reference; }
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Workshop", mappedBy="inspiration")
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="inspiration")
      */
-    private $workshops;
+    private $events;
 
     /**
-     * @return Collection|Workshop[]
+     * @return Collection|Event[]
      */
-    public function getWorkshops() {
-        return $this->workshops;
+    public function getEvents() {
+        return $this->events;
     }
 
 }

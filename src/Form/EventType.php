@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Workshop;
+use App\Entity\Event;
 use App\Entity\YogaStyle;
 use App\Entity\Location;
 use App\Entity\Inspiration;
@@ -17,12 +17,12 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class WorkshopType extends AbstractType
+class EventType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Workshop::class,
+            'data_class' => Event::class,
         ));
     }
     

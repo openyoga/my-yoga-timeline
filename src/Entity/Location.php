@@ -16,7 +16,7 @@ class Location
     const NUM_ITEMS = 10;
 
     public function __construct() {
-        $this->workshops = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -58,15 +58,15 @@ class Location
     public function setCity($city) {        $this->city = $city; }
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Workshop", mappedBy="location")
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="location")
      */
-    private $workshops;
+    private $events;
 
     /**
-     * @return Collection|Workshop[]
+     * @return Collection|Event[]
      */
-    public function getWorkshops() {
-        return $this->workshops;
+    public function getEvents() {
+        return $this->events;
     }
 
 }

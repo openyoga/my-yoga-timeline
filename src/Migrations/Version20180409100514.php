@@ -15,7 +15,7 @@ class Version20180409100514 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE UNIQUE INDEX unique_workshop_participant ON workshops_participants (workshop_id, participant_id)');
+        $this->addSql('CREATE UNIQUE INDEX unique_event_participant ON events_participants (event_id, participant_id)');
     }
 
     public function down(Schema $schema)
@@ -23,6 +23,6 @@ class Version20180409100514 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP INDEX unique_workshop_participant ON workshops_participants');
+        $this->addSql('DROP INDEX unique_event_participant ON events_participants');
     }
 }

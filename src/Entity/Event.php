@@ -6,10 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\WorkshopRepository")
- * @ORM\Table(name="workshops")
+ * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
+ * @ORM\Table(name="events")
  */
-class Workshop
+class Event
 {
     const NUM_ITEMS = 10;
 
@@ -26,7 +26,7 @@ class Workshop
     public function getId() { return $this->id; }
 
     /**
-     * @ORM\ManyToOne(targetEntity="YogaStyle", inversedBy="workshops")
+     * @ORM\ManyToOne(targetEntity="YogaStyle", inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank
      */
@@ -35,7 +35,7 @@ class Workshop
     public function setYogaStyle($yogaStyle) {        $this->yogaStyle = $yogaStyle; }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Location", inversedBy="workshops")
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank
      */
@@ -52,7 +52,7 @@ class Workshop
     public function setLocationFee($locationFee) {        $this->locationFee = $locationFee; }
 
     /**
-     * @ORM\ManyToOne(targetEntity="Inspiration", inversedBy="workshops")
+     * @ORM\ManyToOne(targetEntity="Inspiration", inversedBy="events")
      * @ORM\JoinColumn(nullable=true)
      */
     private $inspiration;

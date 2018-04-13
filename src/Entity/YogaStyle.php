@@ -16,7 +16,7 @@ class YogaStyle
     const NUM_ITEMS = 10;
 
     public function __construct() {
-        $this->workshops = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -44,15 +44,15 @@ class YogaStyle
     public function setdescription($description) {        $this->description = $description; }
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Workshop", mappedBy="yogaStyle")
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="yogaStyle")
      */
-    private $workshops;
+    private $events;
 
     /**
-     * @return Collection|Workshop[]
+     * @return Collection|Event[]
      */
-    public function getWorkshops() {
-        return $this->workshops;
+    public function getEvents() {
+        return $this->events;
     }
 
 }

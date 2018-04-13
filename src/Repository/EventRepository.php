@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Workshop;
-use App\Entity\WorkshopParticipant;
+use App\Entity\Event;
+use App\Entity\EventParticipant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Workshop|null find($id, $lockMode = null, $lockVersion = null)
- * @method Workshop|null findOneBy(array $criteria, array $orderBy = null)
- * @method Workshop[]    findAll()
- * @method Workshop[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Event|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Event|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Event[]    findAll()
+ * @method Event[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class WorkshopRepository extends ServiceEntityRepository
+class EventRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Workshop::class);
+        parent::__construct($registry, Event::class);
     }
 
     public function findAllJoinedDetails()
@@ -63,7 +63,7 @@ class WorkshopRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findOneByIdJoinedDetails($workshopId)
+    public function findOneByIdJoinedDetails($eventId)
     {
         return $this->createQueryBuilder('w')
             // YogaStyle
@@ -77,12 +77,12 @@ class WorkshopRepository extends ServiceEntityRepository
             ->addSelect('i')
             // bind parameter
             ->andWhere('w.id = :id')
-            ->setParameter('id', $workshopId)
+            ->setParameter('id', $eventId)
             ->getQuery()
             ->getOneOrNullResult();
     }
 
-    public function findParticipantsByWorkshopId($workshopId)
+    public function findParticipantsByEventId($eventId)
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql = '
@@ -92,20 +92,20 @@ class WorkshopRepository extends ServiceEntityRepository
                 wp.fee_payed_yn,
                 wp.attending_yn
             FROM 
-                workshops_participants wp
+                events_participants wp
                 join participants p ON wp.participant_id = p.id
             WHERE 
-                wp.workshop_id = :workshop_id
+                wp.event_id = :event_id
             ORDER BY 
                 p.first_name ASC,
                 p.last_name ASC
             ';
         $stmt = $conn->prepare($sql);
-        $stmt->execute(['workshop_id' => $workshopId]);
+        $stmt->execute(['event_id' => $eventId]);
         return $stmt->fetchAll();
     }
 
-    public function findAvailableParticipantsByWorkshopId($workshopId)
+    public function findAvailableParticipantsByEventId($eventId)
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql = '
@@ -118,21 +118,21 @@ class WorkshopRepository extends ServiceEntityRepository
                     SELECT 
                         participant_id
                     FROM
-                        workshops_participants
+                        events_participants
                     WHERE
-                        workshop_id = :workshop_id
+                        event_id = :event_id
                 )
             ORDER BY 
                 p.first_name ASC,
                 p.last_name ASC
             ';
         $stmt = $conn->prepare($sql);
-        $stmt->execute(['workshop_id' => $workshopId]);
+        $stmt->execute(['event_id' => $eventId]);
         return $stmt->fetchAll();
     }
 
 //    /**
-//     * @return Workshop[] Returns an array of Workshop objects
+//     * @return Event[] Returns an array of Event objects
 //     */
     /*
     public function findByExampleField($value)
@@ -149,7 +149,7 @@ class WorkshopRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Workshop
+    public function findOneBySomeField($value): ?Event
     {
         return $this->createQueryBuilder('w')
             ->andWhere('w.exampleField = :val')
