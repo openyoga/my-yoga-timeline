@@ -17,7 +17,7 @@ use App\Form\EventType;
 class EventController extends Controller
 {
     /**
-     * @Route("/", name="event_index")
+     * @Route("/", name="events")
      * @Method({"GET"})
      */
     public function index()
@@ -43,7 +43,7 @@ class EventController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
             $entityManager->flush();
-            return $this->redirectToRoute('event_index');
+            return $this->redirectToRoute('events');
         }
 
         return $this->render('events/new.html.twig', array(

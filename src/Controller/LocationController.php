@@ -15,7 +15,7 @@ use App\Form\LocationType;
 class LocationController extends Controller
 {
     /**
-     * @Route("/", name="location_index")
+     * @Route("/", name="locations")
      * @Method({"GET"})
      */
     public function index()
@@ -41,7 +41,7 @@ class LocationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($location);
             $entityManager->flush();
-            return $this->redirectToRoute('location_index');
+            return $this->redirectToRoute('locations');
         }
 
         return $this->render('locations/new.html.twig', array(
@@ -64,7 +64,7 @@ class LocationController extends Controller
             $entityManager->persist($location);
             $entityManager->flush();
             //$this->addFlash('success', 'location.updated_successfully');
-            return $this->redirectToRoute('location_index', array(
+            return $this->redirectToRoute('locations', array(
                 'id' => $location->getId()
             ));
         }

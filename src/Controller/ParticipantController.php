@@ -15,7 +15,7 @@ use App\Form\ParticipantType;
 class ParticipantController extends Controller
 {
     /**
-     * @Route("/", name="participant_index")
+     * @Route("/", name="participants")
      * @Method({"GET"})
      */
     public function index()
@@ -41,7 +41,7 @@ class ParticipantController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($participant);
             $entityManager->flush();
-            return $this->redirectToRoute('participant_index');
+            return $this->redirectToRoute('participants');
         }
 
         return $this->render('participants/new.html.twig', array(
@@ -64,7 +64,7 @@ class ParticipantController extends Controller
             $entityManager->persist($participant);
             $entityManager->flush();
             //$this->addFlash('success', 'participant.updated_successfully');
-            return $this->redirectToRoute('participant_index', array(
+            return $this->redirectToRoute('participants', array(
                 'id' => $participant->getId()
             ));
         }

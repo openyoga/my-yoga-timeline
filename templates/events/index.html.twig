@@ -5,7 +5,7 @@
 {% block body %}
 
 {% for event in events %}
-<h2><a href="/events/{{ event.id }}/edit/event_index">{{ event.yogaStyle.name }}</a> - <a href="/events/{{ event.id }}/manage_participants/event_index">Participants</a></h2>
+<h2><a href="/events/{{ event.id }}/edit/events">{{ event.yogaStyle.name }}</a> - <a href="/events/{{ event.id }}/manage_participants/events">Participants</a></h2>
 <p>
   {{ event.plannedDate|localizeddate('long', 'short')}} - {{ event.plannedDate|date('l') }}, {{ event.duration}} minutes<br>
   {{ event.location.name}}{% if event.location.street %}, {{ event.location.street }}{% endif %},{% if event.location.zipCode %} {{ event.location.zipCode }}{% endif %} {{ event.location.city }}<br>

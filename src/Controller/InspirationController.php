@@ -15,7 +15,7 @@ use App\Form\InspirationType;
 class InspirationController extends Controller
 {
     /**
-     * @Route("/", name="inspiration_index")
+     * @Route("/", name="inspirations")
      * @Method({"GET"})
      */
     public function index()
@@ -41,7 +41,7 @@ class InspirationController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($inspiration);
             $entityManager->flush();
-            return $this->redirectToRoute('inspiration_index');
+            return $this->redirectToRoute('inspirations');
         }
 
         return $this->render('inspirations/new.html.twig', array(
@@ -64,7 +64,7 @@ class InspirationController extends Controller
             $entityManager->persist($inspiration);
             $entityManager->flush();
             //$this->addFlash('success', 'inspiration.updated_successfully');
-            return $this->redirectToRoute('inspiration_index', array(
+            return $this->redirectToRoute('inspirations', array(
                 'id' => $inspiration->getId()
             ));
         }

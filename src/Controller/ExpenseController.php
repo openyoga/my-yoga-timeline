@@ -15,7 +15,7 @@ use App\Form\ExpenseType;
 class ExpenseController extends Controller
 {
     /**
-     * @Route("/", name="expense_index")
+     * @Route("/", name="expenses")
      * @Method({"GET"})
      */
     public function index()
@@ -41,7 +41,7 @@ class ExpenseController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($expense);
             $entityManager->flush();
-            return $this->redirectToRoute('expense_index');
+            return $this->redirectToRoute('expenses');
         }
 
         return $this->render('expenses/new.html.twig', array(
@@ -64,7 +64,7 @@ class ExpenseController extends Controller
             $entityManager->persist($expense);
             $entityManager->flush();
             //$this->addFlash('success', 'expense.updated_successfully');
-            return $this->redirectToRoute('expense_index', array(
+            return $this->redirectToRoute('expenses', array(
                 'id' => $expense->getId()
             ));
         }

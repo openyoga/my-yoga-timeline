@@ -15,7 +15,7 @@ use App\Form\YogaStyleType;
 class YogaStyleController extends Controller
 {
     /**
-     * @Route("/", name="yoga_style_index")
+     * @Route("/", name="yoga_styles")
      * @Method({"GET"})
      */
     public function index()
@@ -41,7 +41,7 @@ class YogaStyleController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($yoga_style);
             $entityManager->flush();
-            return $this->redirectToRoute('yoga_style_index');
+            return $this->redirectToRoute('yoga_styles');
         }
 
         return $this->render('yoga_styles/new.html.twig', array(
@@ -64,7 +64,7 @@ class YogaStyleController extends Controller
             $entityManager->persist($yoga_style);
             $entityManager->flush();
             //$this->addFlash('success', 'yoga_style.updated_successfully');
-            return $this->redirectToRoute('yoga_style_index', array(
+            return $this->redirectToRoute('yoga_styles', array(
                 'id' => $yoga_style->getId()
             ));
         }
