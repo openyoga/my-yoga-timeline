@@ -16,12 +16,12 @@
 <ul>
 {% for participant in participants %}
   <li>
-    <a href="/events/{{ event.id }}/remove_participant/{{ participant.id }}/{{ backToRoute }}">remove</a>
+    <a href="javascript:myt.submit('/events/{{ event.id }}/remove_participant/{{ participant.id }}/{{ backToRoute }}');">remove</a>
     {% if participant.academic_title %}{{ participant.academic_title }}{% endif %}
     {{ participant.first_name}}
     {% if participant.last_name %}{{ participant.last_name }}{% endif %},
-    <a href="/events/{{ event.id }}/toggle_payed_status/{{ participant.id }}/{{ backToRoute }}">{% if participant.fee_payed_yn == 'N' %}<span class="text-danger">NOT</span> {% endif %}payed</a>, 
-    <a href="/events/{{ event.id }}/toggle_attending_status/{{ participant.id }}/{{ backToRoute }}">{% if participant.attending_yn == 'N' %}<span class="text-danger">NOT</span> {% endif %}attending</a>
+    <a href="javascript:myt.submit('/events/{{ event.id }}/toggle_payed_status/{{ participant.id }}/{{ backToRoute }}');">{% if participant.fee_payed_yn == 'N' %}<span class="text-danger">NOT</span> {% endif %}payed</a>, 
+    <a href="javascript:myt.submit('/events/{{ event.id }}/toggle_attending_status/{{ participant.id }}/{{ backToRoute }}');">{% if participant.attending_yn == 'N' %}<span class="text-danger">NOT</span> {% endif %}attending</a>
   </li>
 {% endfor %}
 </ul>
@@ -31,7 +31,7 @@
 <ul>
 {% for participant in availableAarticipants %}
   <li>
-    <a href="/events/{{ event.id }}/add_participant/{{ participant.id }}/{{ backToRoute }}">add</a>
+    <a href="javascript:myt.submit('/events/{{ event.id }}/add_participant/{{ participant.id }}/{{ backToRoute }}');">add</a>
     {% if participant.academic_title %}{{ participant.academic_title }}{% endif %}
     {{ participant.first_name}}
     {% if participant.last_name %}{{ participant.last_name }}{% endif %}

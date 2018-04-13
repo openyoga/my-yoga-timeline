@@ -79,7 +79,7 @@ class EventController extends Controller
 
     /**
      * @Route("/{id}/manage_participants/{backToRoute}", requirements={"id": "\d+"}, name="event_manage_participants")
-     * @Method({"GET", "POST"})
+     * @Method({"GET"})
      */
     public function manage_participants(Request $request, Event $event, $backToRoute)
     {
@@ -100,7 +100,7 @@ class EventController extends Controller
 
     /**
      * @Route("/{id}/add_participant/{participantId}/{backToRoute}", requirements={"id": "\d+", "participantId": "\d+"}, name="event_add_participant")
-     * @Method({"GET"})
+     * @Method({"POST"})
      */
     public function add_participant(Request $request, Event $event, $participantId, $backToRoute)
     {
@@ -124,7 +124,7 @@ class EventController extends Controller
 
     /**
      * @Route("/{id}/remove_participant/{participantId}/{backToRoute}", requirements={"id": "\d+", "participantId": "\d+"}, name="event_remove_participant")
-     * @Method({"GET"})
+     * @Method({"POST"})
      */
     public function remove_participant(Request $request, Event $event, $participantId, $backToRoute)
     {
@@ -147,7 +147,7 @@ class EventController extends Controller
 
     /**
      * @Route("/{id}/toggle_payed_status/{participantId}/{backToRoute}", requirements={"id": "\d+", "participantId": "\d+"}, name="toggle_payed_status")
-     * @Method({"GET"})
+     * @Method({"POST"})
      */
     public function toggle_payed_status(Request $request, Event $event, $participantId, $backToRoute)
     {
@@ -175,7 +175,7 @@ class EventController extends Controller
 
     /**
      * @Route("/{id}/toggle_attending_status/{participantId}/{backToRoute}", requirements={"id": "\d+", "participantId": "\d+"}, name="toggle_attending_status")
-     * @Method({"GET"})
+     * @Method({"POST"})
      */
     public function toggle_attending_status(Request $request, Event $event, $participantId, $backToRoute)
     {
