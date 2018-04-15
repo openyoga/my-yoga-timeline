@@ -20,7 +20,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = $this->getDoctrine()->getRepository(Expense::class)->findAll();        
+        $expenses = $this->getDoctrine()->getRepository(Expense::class)->findBy(array(), array('dateSpent' => 'DESC'));        
         return $this->render('expenses/index.html.twig', array(
             'expenses' => $expenses
         ));

@@ -2,18 +2,18 @@
 
 namespace App\Form;
 
-use App\Entity\YogaStyle;
+use App\Entity\EventCategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class YogaStyleType extends AbstractType
+class EventCategoryType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => YogaStyle::class,
+            'data_class' => EventCategory::class,
         ));
     }
     
@@ -22,8 +22,7 @@ class YogaStyleType extends AbstractType
         $builder
             ->add('name')
             ->add('description', TextareaType::class, array(
-                //'label' => 'label.description',
-                'required' => false
+                'required' => true
             ))
         ;
     }

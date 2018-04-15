@@ -20,7 +20,7 @@ class ParticipantController extends Controller
      */
     public function index()
     {
-        $participants = $this->getDoctrine()->getRepository(Participant::class)->findAll();        
+        $participants = $this->getDoctrine()->getRepository(Participant::class)->findBy(array(), array('firstName' => 'ASC', 'lastName' => 'ASC'));        
         return $this->render('participants/index.html.twig', array(
             'participants' => $participants
         ));

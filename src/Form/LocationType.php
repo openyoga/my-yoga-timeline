@@ -24,14 +24,14 @@ class LocationType extends AbstractType
         $builder
             ->add('name')
             ->add('street', TextType::class, array(
-                //'label' => 'label.street',
                 'required' => false
             ))
-            ->add('zip_code', TextType::class, array(
-                //'label' => 'label.zip_code',
+            ->add('zipCode', TextType::class, array(
                 'required' => false
             ))
             ->add('city')
+            ->add('comment', TextareaType::class, array(
+                'required' => false))
         ;
     }
 }

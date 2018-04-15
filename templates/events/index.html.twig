@@ -5,12 +5,12 @@
 {% block body %}
 
 {% for event in events %}
-<h2><a href="/events/{{ event.id }}/edit/events">{{ event.yogaStyle.name }}</a> - <a href="/events/{{ event.id }}/manage_participants/events">Participants</a></h2>
+<h2><a href="/events/{{ event.id }}/edit/events">{{ event.category.name }}</a> - <a href="/events/{{ event.id }}/manage_participants/events">Participants</a></h2>
 <p>
   {{ event.plannedDate|localizeddate('long', 'short')}} - {{ event.plannedDate|date('l') }}, {{ event.duration}} minutes<br>
   {{ event.location.name}}{% if event.location.street %}, {{ event.location.street }}{% endif %},{% if event.location.zipCode %} {{ event.location.zipCode }}{% endif %} {{ event.location.city }}<br>
-  <strong>Inspiration: </strong>{% if event.inspiration is not null %}{{ event.inspiration.author }} | {{ event.inspiration.title }} | {{ event.inspiration.reference }}{% endif %}<br>
-  {% if event.comments %}<strong>Comments: </strong>{{ event.comments }}{% endif %}
+  <strong>Inspiration: </strong>{% if event.inspiration is not null %}{{ event.inspiration.author }} | {{ event.inspiration.title }} | {{ event.inspiration.reference }}{% else %}<span class="text-danger">Not defined yet</span>{% endif %}<br>
+  {% if event.comment %}<strong>Comment: </strong>{{ event.comment }}{% endif %}
 </p>
 {% endfor %}
 

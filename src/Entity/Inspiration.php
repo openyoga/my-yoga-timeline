@@ -28,7 +28,7 @@ class Inspiration
     public function getId() { return $this->id; }
 
     /**
-     * @ORM\Column(type="string", length=100, unique=true)
+     * @ORM\Column(type="string", length=100, nullable=false, unique=true)
      * @Assert\NotBlank
      */
     private $author;
@@ -36,7 +36,7 @@ class Inspiration
     public function setAuthor($author) {        $this->author = $author; }
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=false)
      * @Assert\NotBlank
      */
     private $title;

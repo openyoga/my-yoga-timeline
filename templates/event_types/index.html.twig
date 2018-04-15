@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event Categories (<a href="/event-categories/new">new</a>){% endblock %}
+
+{% block body %}
+
+{% for style in event_categories %}
+<h2><a href="/event-categories/{{ style.id }}/edit">{{ style.name }}</a></h2>
+<p>{{ style.description }}</p>
+{% endfor %}
+
+{% endblock %}

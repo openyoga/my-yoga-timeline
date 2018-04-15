@@ -8,10 +8,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\YogaStyleRepository")
- * @ORM\Table(name="yoga_styles")
+ * @ORM\Entity(repositoryClass="App\Repository\EventCategoryRepository")
+ * @ORM\Table(name="event_categories")
  */
-class YogaStyle
+class EventCategory
 {
     const NUM_ITEMS = 10;
 
@@ -28,7 +28,7 @@ class YogaStyle
     public function getId() { return $this->id; }
 
     /**
-     * @ORM\Column(type="string", length=100, unique=true)
+     * @ORM\Column(type="string", length=100, nullable=false, unique=true)
      * @Assert\NotBlank
      */
     private $name;
@@ -36,7 +36,7 @@ class YogaStyle
     public function setName($name) {        $this->name = $name; }
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=500, nullable=false)
      * @Assert\NotBlank
      */
     private $description;
@@ -44,7 +44,7 @@ class YogaStyle
     public function setdescription($description) {        $this->description = $description; }
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="yogaStyle")
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="category")
      */
     private $events;
 

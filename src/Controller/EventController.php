@@ -109,7 +109,6 @@ class EventController extends Controller
         $eventParticipant = new EventParticipant();
         $eventParticipant->setEvent($event);
         $eventParticipant->setParticipant($participant);
-        $eventParticipant->setFeePayedYn('N');
         $eventParticipant->setAttendingYn('Y');
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -146,35 +145,7 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/{id}/toggle_payed_status/{participantId}/{backToRoute}", requirements={"id": "\d+", "participantId": "\d+"}, name="toggle_payed_status")
-     * @Method({"POST"})
-     */
-    public function toggle_payed_status(Request $request, Event $event, $participantId, $backToRoute)
-    {
-        $participant = $this->getDoctrine()->getRepository(Participant::class)->find($participantId);
-
-        $eventParticipant = $this->getDoctrine()->getRepository(EventParticipant::class)->findOneBy(array (
-            'event' => $event->getId(),
-            'participant' => $participantId
-        ));
-        if ($eventParticipant->getFeePayedYn() == 'N') {
-            $eventParticipant->setFeePayedYn('Y');
-        }
-        else {
-            $eventParticipant->setFeePayedYn('N');
-        }
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($eventParticipant);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('event_manage_participants', array(
-            'id' => $event->getId(),
-            'backToRoute' => $backToRoute
-        ));
-    }
-
-    /**
-     * @Route("/{id}/toggle_attending_status/{participantId}/{backToRoute}", requirements={"id": "\d+", "participantId": "\d+"}, name="toggle_attending_status")
+     * @Route("/{id}/toggle_attending_status/{participantId}/{backToRoute}", requirements={"id": "\d+", "participantId": "\d+"}, name="event_toggle_attending_status")
      * @Method({"POST"})
      */
     public function toggle_attending_status(Request $request, Event $event, $participantId, $backToRoute)

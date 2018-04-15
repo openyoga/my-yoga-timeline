@@ -28,7 +28,7 @@ class Location
     public function getId() { return $this->id; }
 
     /**
-     * @ORM\Column(type="string", length=100, unique=true)
+     * @ORM\Column(type="string", length=100, nullable=false, unique=true)
      * @Assert\NotBlank
      */
     private $name;
@@ -50,12 +50,19 @@ class Location
     public function setZipCode($zipCode) {        $this->zipCode = $zipCode; }
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=false)
      * @Assert\NotBlank
      */
     private $city;
-    public function getCity()      { return $this->city;           }
+    public function getCity()      { return $this->city;         }
     public function setCity($city) {        $this->city = $city; }
+
+    /**
+     * @ORM\Column(type="string", length=250, nullable=true)
+     */
+    private $comment;
+    public function getComment()         { return $this->comment;            }
+    public function setComment($comment) {        $this->comment = $comment; }
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="location")

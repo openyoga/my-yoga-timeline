@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Payments (<a href="/payments/new">new</a>){% endblock %}
+
+{% block body %}
+
+{% for payment in payments %}
+<h2><a href="/payments/{{ payment.id }}/edit/payments">{{ payment.receiptDate|localizeddate('long', 'none') }}</a></h2>
+<p>{% if payment.participant.academicTitle %}{{ payment.participant.academicTitle }} {% endif %}{{ payment.participant.firstName }}{% if payment.participant.lastName %} {{ payment.participant.lastName }} {% endif %} - {{ payment.amount }}</p>
+{% endfor %}
+
+{% endblock %}

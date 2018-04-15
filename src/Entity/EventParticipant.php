@@ -19,6 +19,10 @@ class EventParticipant
 {
     const NUM_ITEMS = 10;
 
+    public function __construct() {
+        $this->attendingYn = "Y";        
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -54,19 +58,18 @@ class EventParticipant
     public function setSpecialFee($specialFee) {        $this->specialFee = $specialFee; }
 
     /**
-     * @ORM\Column(type="string", length=1, nullable=false)
-     * @Assert\Choice({"Y", "N"})
-     */
-    private $feePayedYn;
-    public function getFeePayedYn()            { return $this->feePayedYn;               }
-    public function setFeePayedYn($feePayedYn) {        $this->feePayedYn = $feePayedYn; }
-
-    /**
-     * @ORM\Column(type="string", length=1, nullable=false)
+     * @ORM\Column(type="string", length=1, nullable=false, options={"default":"Y"})
      * @Assert\Choice({"Y", "N"})
      */
     private $attendingYn;
     public function getAttendingYn()             { return $this->attendingYn;                }
     public function setAttendingYn($attendingYn) {        $this->attendingYn = $attendingYn; }
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $comment;
+    public function getComment()         { return $this->comment;            }
+    public function setComment($comment) {        $this->comment = $comment; }
 
 }

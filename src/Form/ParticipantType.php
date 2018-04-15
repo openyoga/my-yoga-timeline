@@ -24,29 +24,29 @@ class ParticipantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('academic_title', TextType::class, array(
+            ->add('academicTitle', TextType::class, array(
                 'required' => false))
-            ->add('first_name', TextType::class, array(
+            ->add('firstName', TextType::class, array(
                 'required' => true))
-            ->add('last_name', TextType::class, array(
+            ->add('lastName', TextType::class, array(
                 'required' => false))
             ->add('email', EmailType::class, array(
                 'required' => true))
-            ->add('comments', TextareaType::class, array(
-                'required' => false))
-            ->add('info_mails_yn', ChoiceType::class, array(
+            ->add('infoMailsYn', ChoiceType::class, array(
                 'required' => true,
                 'choices'  => array(
                     'Yes' => 'Y',
                     'No' => 'N'),
                 'label' => 'Wants to have info mails (must be opt in!)'))
-            ->add('active_yn', ChoiceType::class, array(
+            ->add('activeYn', ChoiceType::class, array(
                 'required' => true,
                 'choices'  => array(
                     'Yes' => 'Y',
                     'No' => 'N'),
                 'label' => 'Active'))
-                        ;
+            ->add('comment', TextareaType::class, array(
+                'required' => false))
+            ;
     }
 }
 

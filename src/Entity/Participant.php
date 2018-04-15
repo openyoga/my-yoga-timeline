@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ParticipantRepository")
@@ -15,6 +17,8 @@ class Participant
 
     public function __construct() {
         $this->plannedDate = new \DateTime();
+        $this->infoMailsYn = "N";        
+        $this->activeYn = "Y";        
     }
 
     /**
@@ -60,7 +64,7 @@ class Participant
     public function setEmail($email) {        $this->email = $email; }
 
     /**
-     * @ORM\Column(type="string", length=1, nullable=false)
+     * @ORM\Column(type="string", length=1, nullable=false, options={"default":"N"})
      * @Assert\Choice({"Y", "N"})
      */
     private $infoMailsYn;
@@ -68,7 +72,7 @@ class Participant
     public function setInfoMailsYn($infoMailsYn) {        $this->infoMailsYn = $infoMailsYn; }
 
     /**
-     * @ORM\Column(type="string", length=1, nullable=false)
+     * @ORM\Column(type="string", length=1, nullable=false, options={"default":"Y"})
      * @Assert\Choice({"Y", "N"})
      */
     private $activeYn;
@@ -76,10 +80,21 @@ class Participant
     public function setActiveYn($activeYn) {        $this->activeYn = $activeYn; }
 
     /**
-     * @ORM\Column(type="string", length=500, nullable=true)
+     * @ORM\Column(type="string", length=250, nullable=true)
      */
-    private $comments;
-    public function getComments()          { return $this->comments;             }
-    public function setComments($comments) {        $this->comments = $comments; }
+    private $comment;
+    public function getComment()         { return $this->comment;            }
+    public function setComment($comment) {        $this->comment = $comment; }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Payment", mappedBy="participant")
+     */
+    private $payments;
+    /**
+     * @return Collection|Payment[]
+     */
+    public function getPayments() {
+        return $this->payments;
+    }
 
 }

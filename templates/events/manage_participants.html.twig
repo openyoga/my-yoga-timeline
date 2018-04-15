@@ -3,12 +3,12 @@
 {% block title %}<a href="/events/{{ event.id }}/edit/{{ backToRoute }}">Edit Event #{{ event.id }}</a> - Manage Participants{% endblock %}
 
 {% block body %}
-<h2>{{ event.yogaStyle.name }}</h2>
+<h2>{{ event.category.name }}</h2>
 <p>
   {{ event.plannedDate|localizeddate('long', 'short')}} - {{ event.plannedDate|date('l') }}, {{ event.duration}} minutes<br>
   {{ event.location.name}}{% if event.location.street %}, {{ event.location.street }}{% endif %},{% if event.location.zipCode %} {{ event.location.zipCode }}{% endif %} {{ event.location.city }}<br>
   <strong>Inspiration: </strong>{% if event.inspiration is not null %}{{ event.inspiration.author }} | {{ event.inspiration.title }} | {{ event.inspiration.reference }}{% endif %}<br>
-  {% if event.comments %}<strong>Comments: </strong>{{ event.comments }}{% endif %}
+  {% if event.comment %}<strong>Comment: </strong>{{ event.comment }}{% endif %}
 </p>
 
 <h2>Participants</h2>
@@ -20,7 +20,6 @@
     {% if participant.academic_title %}{{ participant.academic_title }}{% endif %}
     {{ participant.first_name}}
     {% if participant.last_name %}{{ participant.last_name }}{% endif %},
-    <a href="javascript:myt.submit('/events/{{ event.id }}/toggle_payed_status/{{ participant.id }}/{{ backToRoute }}');">{% if participant.fee_payed_yn == 'N' %}<span class="text-danger">NOT</span> {% endif %}payed</a>, 
     <a href="javascript:myt.submit('/events/{{ event.id }}/toggle_attending_status/{{ participant.id }}/{{ backToRoute }}');">{% if participant.attending_yn == 'N' %}<span class="text-danger">NOT</span> {% endif %}attending</a>
   </li>
 {% endfor %}

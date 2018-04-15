@@ -22,18 +22,18 @@ class EventRepository extends ServiceEntityRepository
 
     public function findAllJoinedDetails()
     {
-        return $this->createQueryBuilder('w')
-            // YogaStyle
-            ->innerJoin('w.yogaStyle', 'y')
-            ->addSelect('y')
+        return $this->createQueryBuilder('e')
+            // EventCategory
+            ->innerJoin('e.category', 'ec')
+            ->addSelect('ec')
             // Location
-            ->innerJoin('w.location', 'l')
+            ->innerJoin('e.location', 'l')
             ->addSelect('l')
             // Inspiration
-            ->leftJoin('w.inspiration', 'i')
+            ->leftJoin('e.inspiration', 'i')
             ->addSelect('i')
             // order
-            ->orderBy('w.plannedDate', 'DESC')
+            ->orderBy('e.plannedDate', 'DESC')
             // get result
             ->getQuery()
             ->getResult();
@@ -43,21 +43,21 @@ class EventRepository extends ServiceEntityRepository
     {
         $nowMinus24Hours = new \DateTime("now");
         $nowMinus24Hours->modify('-24 hour');
-        return $this->createQueryBuilder('w')
-            // YogaStyle
-            ->innerJoin('w.yogaStyle', 'y')
-            ->addSelect('y')
+        return $this->createQueryBuilder('e')
+            // EventCategory
+            ->innerJoin('e.category', 'ec')
+            ->addSelect('ec')
             // Location
-            ->innerJoin('w.location', 'l')
+            ->innerJoin('e.location', 'l')
             ->addSelect('l')
             // Inspiration
-            ->leftJoin('w.inspiration', 'i')
+            ->leftJoin('e.inspiration', 'i')
             ->addSelect('i')
             // bind parameter
-            ->andWhere('w.plannedDate > :nowMinus24Hours')
+            ->andWhere('e.plannedDate > :nowMinus24Hours')
             ->setParameter('nowMinus24Hours', $nowMinus24Hours)
             // order
-            ->orderBy('w.plannedDate', 'ASC')
+            ->orderBy('e.plannedDate', 'ASC')
             // get result
             ->getQuery()
             ->getResult();
@@ -65,18 +65,18 @@ class EventRepository extends ServiceEntityRepository
 
     public function findOneByIdJoinedDetails($eventId)
     {
-        return $this->createQueryBuilder('w')
-            // YogaStyle
-            ->innerJoin('w.yogaStyle', 'y')
-            ->addSelect('y')
+        return $this->createQueryBuilder('e')
+            // EventCategory
+            ->innerJoin('e.category', 'ec')
+            ->addSelect('ec')
             // Location
-            ->innerJoin('w.location', 'l')
+            ->innerJoin('e.location', 'l')
             ->addSelect('l')
             // Inspiration
-            ->leftJoin('w.inspiration', 'i')
+            ->leftJoin('e.inspiration', 'i')
             ->addSelect('i')
             // bind parameter
-            ->andWhere('w.id = :id')
+            ->andWhere('e.id = :id')
             ->setParameter('id', $eventId)
             ->getQuery()
             ->getOneOrNullResult();
@@ -88,14 +88,13 @@ class EventRepository extends ServiceEntityRepository
         $sql = '
             SELECT 
                 p.*,
-                wp.special_fee,
-                wp.fee_payed_yn,
-                wp.attending_yn
+                ep.special_fee,
+                ep.attending_yn
             FROM 
-                events_participants wp
-                join participants p ON wp.participant_id = p.id
+                events_participants ep
+                join participants p ON ep.participant_id = p.id
             WHERE 
-                wp.event_id = :event_id
+                ep.event_id = :event_id
             ORDER BY 
                 p.first_name ASC,
                 p.last_name ASC
@@ -137,10 +136,10 @@ class EventRepository extends ServiceEntityRepository
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('w.id', 'ASC')
+            ->orderBy('e.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -151,8 +150,8 @@ class EventRepository extends ServiceEntityRepository
     /*
     public function findOneBySomeField($value): ?Event
     {
-        return $this->createQueryBuilder('w')
-            ->andWhere('w.exampleField = :val')
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

@@ -20,7 +20,7 @@ class InspirationController extends Controller
      */
     public function index()
     {
-        $inspirations = $this->getDoctrine()->getRepository(Inspiration::class)->findAll();        
+        $inspirations = $this->getDoctrine()->getRepository(Inspiration::class)->findBy(array(), array('author' => 'ASC', 'title' => 'ASC', 'reference' => 'ASC'));        
         return $this->render('inspirations/index.html.twig', array(
             'inspirations' => $inspirations
         ));

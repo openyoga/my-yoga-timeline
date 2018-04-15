@@ -15,6 +15,7 @@ class Event
 
     public function __construct() {
         $this->plannedDate = new \DateTime();
+        $this->externalEventYn = "N";
     }
 
     /**
@@ -26,13 +27,13 @@ class Event
     public function getId() { return $this->id; }
 
     /**
-     * @ORM\ManyToOne(targetEntity="YogaStyle", inversedBy="events")
+     * @ORM\ManyToOne(targetEntity="EventCategory", inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank
      */
-    private $yogaStyle;
-    public function getYogaStyle()           { return $this->yogaStyle;              }
-    public function setYogaStyle($yogaStyle) {        $this->yogaStyle = $yogaStyle; }
+    private $category;
+    public function getCategory()               { return $this->category;             }
+    public function setCategory($category) {        $this->category = $category; }
 
     /**
      * @ORM\ManyToOne(targetEntity="Location", inversedBy="events")
@@ -92,8 +93,8 @@ class Event
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
      */
-    private $comments;
-    public function getComments()          { return $this->comments;             }
-    public function setComments($comments) {        $this->comments = $comments; }
+    private $comment;
+    public function getComment()          { return $this->comment;             }
+    public function setComment($comment) {        $this->comment = $comment; }
 
 }
